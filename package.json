@@ -1,0 +1,12 @@
+{
+  "name": "birthday-notifier",
+  "version": "1.0.0",
+  "description": "Send notification to slack for upcoming birthdays ",
+  "main": "index.js",
+  "author": "Madhava Di Florio",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "momentjs": "^2.0.0"
+  }
+}
