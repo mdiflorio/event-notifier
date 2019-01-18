@@ -1,7 +1,7 @@
 {
-  "name": "birthday-notifier",
+  "name": "event-notifier",
   "version": "1.0.0",
-  "description": "Send notification to slack for upcoming birthdays ",
+  "description": "Send notification to slack for upcoming events",
   "main": "./src/index.js",
   "author": "Madhava Di Florio",
   "license": "MIT",
