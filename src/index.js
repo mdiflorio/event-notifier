@@ -1,7 +1,8 @@
 require("dotenv").config();
 const moment = require("moment");
 const events = require("./events");
-const axios = require("axios");
+const Push = require( 'pushover-notifications')
+
 
 const TODAY = 0;
 const ONE_WEEK = 7;
@@ -10,16 +11,33 @@ events.list.forEach(event => {
   const daysToEvent = daysRemaining(event.date);
 
   if (daysToEvent == TODAY) {
-    sendSlackAlert(`${event.name} today!!`);
+    sendPushNotification(`${event.name} today!!`);
   } else if (event.one_week_reminder && daysToEvent == ONE_WEEK) {
-    sendSlackAlert(`${event.name} in one week!!`);
+    sendPushNotification(`${event.name} in one week!!`);
   }
 });
 
-async function sendSlackAlert(event) {
-  axios.post(process.env.SLACK_WEBHOOK, { text: event }).catch(err => {
-    console.log(("Error", err));
-  });
+async function sendPushNotification(event) {
+  const notifier = new Push( {
+    user: process.env['PUSHOVER_USER'],
+    token: process.env['PUSHOVER_TOKEN'],
+  })
+
+  const msg = {
+    message: event,	
+    title: "Event",
+    sound: 'magic',
+    device: 'iphone',
+    priority: 1
+  }
+
+  notifier.send( msg, function( err, result ) {
+    if ( err ) {
+      throw err
+    }
+    console.log( result )
+  })
+
 }
 
 function daysRemaining(event) {
