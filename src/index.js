@@ -35,7 +35,6 @@ async function sendPushNotification(event) {
     if ( err ) {
       throw err
     }
-    console.log( result )
   })
 
 }
